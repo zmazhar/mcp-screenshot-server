@@ -71,11 +71,15 @@ class ScreenshotServer {
       }
     );
 
-    // Create Screenshots directory in current working directory
-    this.outputDir = './Screenshots';
+    // Create Screenshots directory in project directory
+    const projectDir = path.dirname(new URL(import.meta.url).pathname);
+    console.error(`Project directory: ${projectDir}`);
+    this.outputDir = path.join(projectDir, '..', 'Screenshots');
+    console.error(`Creating Screenshots directory at: ${this.outputDir}`);
     if (!fs.existsSync(this.outputDir)) {
       fs.mkdirSync(this.outputDir, { recursive: true });
     }
+    console.error(`Screenshots directory created/verified at: ${this.outputDir}`);
 
     this.setupToolHandlers();
     

@@ -1,4 +1,5 @@
+Screenshots/
+test.html
 node_modules/
 build/
-*.log
-.env*
+.DS_Store
