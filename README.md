@@ -1,43 +1,19 @@
-# Screenshot MCP Server
+# MCP Screenshot Server
 
-An MCP server that provides screenshot capabilities using Puppeteer. This server allows capturing screenshots of web pages with configurable options.
+An MCP server implementation that provides screenshot functionality using Puppeteer. This server allows capturing screenshots of web pages and local HTML files through a simple MCP tool interface.
 
 ## Features
 
-- Capture screenshots of any web page or local GUI
+- Capture screenshots of any web page or local HTML file
 - Configurable viewport dimensions
 - Full page screenshot support
-- Custom output paths
-- Automatic directory creation
-- Timestamp-based unique filenames
+- Custom output path option
+- Automatic screenshot directory management
 
 ## Installation
 
-1. Clone the repository
-2. Install dependencies:
 ```bash
 npm install
-```
-3. Build the server:
-```bash
-npm run build
-```
-
-## Configuration
-
-Add the server to your MCP settings configuration file (usually located at `~/Library/Application Support/Code - Insiders/User/globalStorage/rooveterinaryinc.roo-cline/settings/cline_mcp_settings.json`):
-
-```json
-{
-  "mcpServers": {
-    "screenshot": {
-      "command": "node",
-      "args": ["/path/to/screenshot-server/build/index.js"],
-      "disabled": false,
-      "alwaysAllow": []
-    }
-  }
-}
 ```
 
 ## Usage
@@ -46,45 +22,24 @@ The server provides a `take_screenshot` tool with the following options:
 
 ```typescript
 {
-  url: string;          // Required: URL to capture (http://, https://, or file:///)
-  width?: number;       // Optional: Viewport width in pixels (1-3840)
-  height?: number;      // Optional: Viewport height in pixels (1-2160)
-  fullPage?: boolean;   // Optional: Capture full scrollable page
-  outputPath?: string;  // Optional: Custom output path
+  url: string;         // URL to capture (can be http://, https://, or file:///)
+  width?: number;      // Viewport width in pixels (1-3840)
+  height?: number;     // Viewport height in pixels (1-2160)
+  fullPage?: boolean;  // Capture full scrollable page
+  outputPath?: string; // Custom output path (optional)
 }
 ```
 
-Screenshots are saved to a `Screenshots` directory by default, with support for custom output paths.
+## Development
 
-### Example Usage
+```bash
+# Build the project
+npm run build
 
-```typescript
-use_mcp_tool({
-  server_name: "screenshot",
-  tool_name: "take_screenshot",
-  arguments: {
-    url: "https://example.com",
-    width: 1280,
-    height: 720,
-    fullPage: true
-  }
-})
+# Run the MCP inspector for testing
+npm run inspector
 ```
 
-## Testing
+## License
 
-After configuring the server in your MCP settings:
-
-1. Restart VSCode to ensure it picks up the MCP server changes
-2. Use the `use_mcp_tool` command as shown in the example above
-3. Check the `Screenshots` directory for the captured image
-
-## Error Handling
-
-The server includes comprehensive error handling for:
-- Invalid URLs
-- Network issues
-- File system errors
-- Invalid parameters
-
-Error messages are returned in a structured format with descriptive text.
+MIT
