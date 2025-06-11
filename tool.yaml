@@ -1,0 +1,26 @@
+name: screenshot
+description: Takes a screenshot of a webpage using Puppeteer
+input_schema:
+  type: object
+  properties:
+    url:
+      type: string
+      description: The URL to screenshot
+    fullPage:
+      type: boolean
+      default: true
+    viewport:
+      type: object
+      properties:
+        width:
+          type: integer
+          default: 1280
+        height:
+          type: integer
+          default: 720
+output_schema:
+  type: object
+  properties:
+    image:
+      type: string
+      description: Base64 encoded image
